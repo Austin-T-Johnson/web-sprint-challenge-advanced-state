@@ -6,17 +6,31 @@ export function moveClockwise() {
         payload: 1
     })
 }
-export function moveCounterClockwise() { }
+export function moveCounterClockwise() { 
+    return ({
+        type: types.MOVE_COUNTERCLOCKWISE,
+        payload: 1
+    })
+}
+export function selectAnswer() { 
 
-export function selectAnswer() { }
+}
 
-export function setMessage() { }
+export function setMessage() { 
 
-export function setQuiz() { }
+}
 
-export function inputChange() { }
+export function setQuiz() { 
 
-export function resetForm() { }
+}
+
+export function inputChange() { 
+
+}
+
+export function resetForm() { 
+
+}
 
 // ❗ Async action creators
 export function fetchQuiz() {

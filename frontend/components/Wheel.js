@@ -14,7 +14,7 @@ function Wheel(props) {
                 <div style={{ "--i": 5 }} className={`cog ${props.wheel === 5 ? 'active' : ''}`}>{props.wheel === 5 ? 'B' : ''}</div>
             </div>
             <div id="keypad">
-                <button id="counterClockwiseBtn" >Counter clockwise</button>
+                <button id="counterClockwiseBtn" onClick={() => props.moveCounterClockwise()}>Counter clockwise</button>
                 <button id="clockwiseBtn" onClick={() => props.moveClockwise()}>Clockwise</button>
             </div>
         </div>
