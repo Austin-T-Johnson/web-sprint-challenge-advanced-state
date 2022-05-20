@@ -5,8 +5,16 @@ import { connect } from 'react-redux'
 function Quiz(props) {
     
   useEffect(() => {
-      props.setQuiz(), props.selectAnswer()
+      props.setQuiz()
+      
   }, [])
+
+
+  const answers = props.quiz.map(ans => {
+      return ans.text
+  })
+console.log("answers:", answers)
+console.log("questions:", props.quiz)
 
   return (
     <div id="wrapper">
@@ -15,18 +23,18 @@ function Quiz(props) {
        
         true ? (
           <>
-            <h2>{props.quiz}</h2>
+            <h2>{props.question}</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected">
-               {}
+              <div className="answer selected" >
+               {answers[0]}
                 <button>
                   SELECTED
                 </button>
               </div>
 
               <div className="answer">
-                {}
+                {answers[1]}
                 <button>
                   Select
                 </button>

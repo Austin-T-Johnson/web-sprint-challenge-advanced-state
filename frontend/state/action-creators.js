@@ -18,19 +18,7 @@ export function moveCounterClockwise() {
 }
 
 export function selectAnswer() { 
-    return function (dispatch) {
-        axios.get(url)
-        .then(res => {
-            console.log(res.data.answers)
-            dispatch({
-                type: types.SET_SELECTED_ANSWER,
-                payload: res.data.answers
-            })
-        })
-        .catch(err => {
-            console.error(err)
-        })
-    }
+   
 }
 
 export function setMessage() { 
@@ -42,10 +30,14 @@ export function setQuiz() {
 return function (dispatch) {
     axios.get(url)
     .then(res => {
-        console.log(res.data.question)
+        console.log(res.data)
         dispatch({
             type: types.SET_QUIZ_INTO_STATE,
             payload: res.data.question
+        })
+        dispatch({
+            type: types.SET_SELECTED_ANSWER,
+            payload: res.data.answers
         })
     })
     .catch(err => {
