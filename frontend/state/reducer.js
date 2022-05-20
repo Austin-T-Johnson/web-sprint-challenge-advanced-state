@@ -21,33 +21,46 @@ function wheel(state = initialWheelState, action) {
             }
 
         }
+        default:
+            return state
     }
-    return state
+
 }
 
 const initialQuestionState = ""
 function question(state = initialQuestionState, action) {
     switch (action.type) {
-        case types.SET_QUIZ_INTO_STATE: {
+        case types.SET_QUESTIONS_INTO_STATE: {
             return state = action.payload
         }
+        default:
+            return state
     }
-    return state
+
 }
 
 const initialQuizState = []
 function quiz(state = initialQuizState, action) {
     switch (action.type) {
-        case types.SET_SELECTED_ANSWER: {
+        case types.SET_QUIZ_INTO_STATE: {
             return state = action.payload
         }
+        default:
+            return state
     }
-    return state
+
 }
 
-const initialSelectedAnswerState = ""
+const initialSelectedAnswerState = false
 function selectedAnswer(state = initialSelectedAnswerState, action) {
-return state
+    switch (action.type) {
+        case types.SET_SELECTED_ANSWER: {
+            return !state
+        }
+        default:
+            return state
+    }
+
 
 }
 

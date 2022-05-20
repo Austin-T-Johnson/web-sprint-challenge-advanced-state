@@ -26,17 +26,17 @@ console.log("questions:", props.quiz)
             <h2>{props.question}</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected" >
+              <div className={`answer ${props.selectedAnswer === true ? "selected" : ""}`} >
                {answers[0]}
-                <button>
-                  SELECTED
+                <button onClick={() => props.selectAnswer()}>
+                  {props.selectedAnswer === true ? "SELECTED" : "Select"}
                 </button>
               </div>
 
-              <div className="answer">
+              <div className={`answer ${props.selectedAnswer === false ? "selected" : ""}`} >
                 {answers[1]}
-                <button>
-                  Select
+                <button onClick={() => props.selectAnswer()}>
+                {props.selectedAnswer === false ? "SELECTED" : "Select"}
                 </button>
               </div>
             </div>

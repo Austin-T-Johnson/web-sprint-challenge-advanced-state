@@ -18,7 +18,10 @@ export function moveCounterClockwise() {
 }
 
 export function selectAnswer() { 
+   return ({
+       type: types.SET_SELECTED_ANSWER,
    
+   })
 }
 
 export function setMessage() { 
@@ -32,12 +35,13 @@ return function (dispatch) {
     .then(res => {
         console.log(res.data)
         dispatch({
-            type: types.SET_QUIZ_INTO_STATE,
+            type: types. SET_QUESTIONS_INTO_STATE,
             payload: res.data.question
         })
         dispatch({
-            type: types.SET_SELECTED_ANSWER,
+            type: types.SET_QUIZ_INTO_STATE,
             payload: res.data.answers
+           
         })
     })
     .catch(err => {
