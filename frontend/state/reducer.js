@@ -69,17 +69,7 @@ const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
     switch (action.type) {
         case types.SET_INFO_MESSAGE: {
-            const message = action.payload
-            return state.map(m => {
-                return (m.quiz_id === message.quiz_id) ? m : message.quiz_id
-
-            })
-        }
-        case types.SET_INFO_MESSAGE: {
-            const message2 = action.payload
-            return state.map(m2 => {
-                return (m2.answer_id === message2.answer_id) ? m2 : message2.answer_id
-            })
+            return state = action.payload
         }
         default:
             return state
