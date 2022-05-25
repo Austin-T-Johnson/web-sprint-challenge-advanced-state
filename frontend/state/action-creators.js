@@ -41,15 +41,18 @@ export function setQuiz() {
 }
 
 
-export function inputChange({ newQuestion, newTrueAnswer, newFalseAnswer, value }) {
+export function inputChange({ question_text, true_answer_text, false_answer_text, value }) {
     return ({
         type: types.INPUT_CHANGE,
-        payload: { newQuestion, newTrueAnswer, newFalseAnswer, value }
+        payload: { question_text, true_answer_text, false_answer_text, value }
     })
 }
 
 export function resetForm() {
-
+    return({
+        type: types.RESET_FORM,
+        
+    })
 }
 
 // ❗ Async action creators
@@ -59,7 +62,7 @@ export function fetchQuiz() {
         // On successful GET:
         // - Dispatch an action to send the obtained quiz to its state
 
-        // dispatch(setQuiz())
+        
 
         axios.get(url)
             .then(res => {
@@ -73,6 +76,7 @@ export function fetchQuiz() {
                     payload: res.data.answers
 
                 })
+                
             })
             .catch(err => {
                 console.error(err)
@@ -97,7 +101,7 @@ export function postAnswer(quiz_id, answer_id) {
                     type: types.SET_INFO_MESSAGE,
                     payload: res.data.message
                 })
-
+                dispatch(fetchQuiz())
 
             })
 
@@ -106,17 +110,22 @@ export function postAnswer(quiz_id, answer_id) {
 
 
 export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
+    console.log("POST QUIZ:", newQuestion, newTrueAnswer, newFalseAnswer)
     return function (dispatch) {
         // On successful POST:
         // - Dispatch the correct message to the the appropriate state
         // - Dispatch the resetting of the form
-        axios.post('http://localhost:9000/api/quiz/new', { newQuestion, newTrueAnswer, newFalseAnswer })
+        axios.post('http://localhost:9000/api/quiz/new', 
+        { "question_text": newQuestion, "true_answer_text": newTrueAnswer, "false_answer_text": newFalseAnswer })
             .then(res => {
-                console.log("POST QUIZ:", res)
-                dispatch({
-                    type: types.INPUT_CHANGE,
-                    payload: res.data
-                })
+                debugger
+                // dispatch({
+                //     type: types.INPUT_CHANGE,
+                //     payload: res.data
+                // })
+            })
+            .catch(err => {
+                console.error(err)
             })
     }
 }
