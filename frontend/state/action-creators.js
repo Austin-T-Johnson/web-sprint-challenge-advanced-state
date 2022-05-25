@@ -41,17 +41,22 @@ export function setQuiz() {
 }
 
 
-export function inputChange({ question_text, true_answer_text, false_answer_text, value }) {
+export function inputChange({ newQuestion, newTrueAnswer, newFalseAnswer }) {
     return ({
         type: types.INPUT_CHANGE,
-        payload: { question_text, true_answer_text, false_answer_text, value }
+        payload: { newQuestion, newTrueAnswer, newFalseAnswer }
     })
 }
 
 export function resetForm() {
-    return({
+    return ({
         type: types.RESET_FORM,
-        
+        payload: {
+            newQuestion: '',
+            newTrueAnswer: '',
+            newFalseAnswer: '',
+        }
+
     })
 }
 
@@ -61,9 +66,6 @@ export function fetchQuiz() {
         // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
         // On successful GET:
         // - Dispatch an action to send the obtained quiz to its state
-
-        
-
         axios.get(url)
             .then(res => {
 
@@ -76,7 +78,7 @@ export function fetchQuiz() {
                     payload: res.data.answers
 
                 })
-                
+
             })
             .catch(err => {
                 console.error(err)
@@ -115,14 +117,15 @@ export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
         // On successful POST:
         // - Dispatch the correct message to the the appropriate state
         // - Dispatch the resetting of the form
-        axios.post('http://localhost:9000/api/quiz/new', 
-        { "question_text": newQuestion, "true_answer_text": newTrueAnswer, "false_answer_text": newFalseAnswer })
+        axios.post('http://localhost:9000/api/quiz/new',
+            { "question_text": newQuestion, "true_answer_text": newTrueAnswer, "false_answer_text": newFalseAnswer })
             .then(res => {
-                debugger
-                // dispatch({
-                //     type: types.INPUT_CHANGE,
-                //     payload: res.data
-                // })
+                console.log("RES:", res)
+                dispatch({
+                    type: types.SET_INFO_MESSAGE,
+                    payload: `Congrats: "${res.data.question}" is a great question!`
+                })
+                dispatch(reset('Form'))
             })
             .catch(err => {
                 console.error(err)
