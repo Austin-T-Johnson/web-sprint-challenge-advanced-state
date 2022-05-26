@@ -51,11 +51,11 @@ export function inputChange({ newQuestion, newTrueAnswer, newFalseAnswer }) {
 export function resetForm() {
     return ({
         type: types.RESET_FORM,
-        payload: {
-            newQuestion: '',
-            newTrueAnswer: '',
-            newFalseAnswer: '',
-        }
+        // payload: {
+        //     newQuestion: '',
+        //     newTrueAnswer: '',
+        //     newFalseAnswer: '',
+        // }
 
     })
 }
@@ -106,6 +106,7 @@ export function postAnswer(quiz_id, answer_id) {
                 dispatch(fetchQuiz())
 
             })
+            .catch(err => console.error(err))
 
     }
 }
@@ -125,7 +126,10 @@ export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
                     type: types.SET_INFO_MESSAGE,
                     payload: `Congrats: "${res.data.question}" is a great question!`
                 })
-                dispatch(reset('Form'))
+                console.log("check me out im right here dispatch style")
+                dispatch({
+                    type: types.RESET_FORM
+                })
             })
             .catch(err => {
                 console.error(err)

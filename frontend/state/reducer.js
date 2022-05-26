@@ -55,7 +55,6 @@ const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
     switch (action.type) {
         case types.SET_SELECTED_ANSWER: {
-            console.log("SELECTED ANSWER PAYLOAD:", action.payload)
             return state = action.payload
         }
         default:
@@ -88,10 +87,13 @@ function form(state = initialFormState, action) {
             const { newQuestion, newTrueAnswer, newFalseAnswer, value } = action.payload
             return { ...state, [newQuestion]: value, [newTrueAnswer]: value, [newFalseAnswer]: value }
         }
-        case types.RESET_FORM: {
-            return { newQuestion: '',
-            newTrueAnswer: '',
-            newFalseAnswer: '',}
+        case types.RESET_FORM: { 
+            console.log("resert form")
+            return {
+                newQuestion: '',
+                newTrueAnswer: '',
+                newFalseAnswer: '',
+            }
         }
         default:
             return state

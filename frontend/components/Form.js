@@ -7,6 +7,8 @@ export function Form(props) {
 
     console.log("STATE:", props.form)
 
+    
+
 
     const onInputChange = evt => {
         props.form.newQuestion = evt.target.value
@@ -26,7 +28,8 @@ export function Form(props) {
     const onSubmit = evt => {
         evt.preventDefault();
         props.postQuiz(props.form.newQuestion, props.form.newTrueAnswer, props.form.newFalseAnswer)
-       props.resetForm()
+     
+       
     }
    
 
@@ -42,7 +45,7 @@ export function Form(props) {
                 placeholder="Enter question"
                 name="newQuestion" 
                 type="text"
-                value={props.newQuestion}
+                value={props.form.newQuestion}
             />
 
             <input
@@ -52,7 +55,7 @@ export function Form(props) {
                 placeholder="Enter true answer"
                 name="newTrueAnswer"
                 type="text"
-                value={props.newTrueAnswer}
+                value={props.form.newTrueAnswer}
             />
 
             <input
@@ -62,7 +65,7 @@ export function Form(props) {
                 placeholder="Enter false answer"
                 name="newFalseAnswer"
                 type="text"
-                value={props.newFalseAnswer}
+                value={props.form.newFalseAnswer}
             />
 
             <button disabled={props.form.newQuestion.trim().length > 0 && props.form.newTrueAnswer.trim().length > 0 && props.form.newFalseAnswer.trim().length > 0 ? false : true }id="submitNewQuizBtn">Submit new quiz</button>
